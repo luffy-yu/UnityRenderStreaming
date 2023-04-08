@@ -2,7 +2,9 @@
 
 ## Custom WebSocket headers fork
 
-This is a fork which enables custom headers to be used with WebSocket signaling. Original README below:
+This is a fork which enables custom headers to be used with WebSocket signaling. It can be added with `https://github.com/VedalAI/UnityRenderStreaming.git?path=/com.unity.renderstreaming`
+
+## Original README
 
 <img src="https://img.shields.io/badge/unity-2020.3-green.svg?style=flat-square" alt="unity 2020.3">
 <img src="https://img.shields.io/badge/unity-2021.3-green.svg?style=flat-square" alt="unity 2021.3">
