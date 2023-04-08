@@ -1,5 +1,9 @@
 # Unity Render Streaming
 
+## Custom WebSocket headers fork
+
+This is a fork which enables custom headers to be used with WebSocket signaling. Original README below:
+
 <img src="https://img.shields.io/badge/unity-2020.3-green.svg?style=flat-square" alt="unity 2020.3">
 <img src="https://img.shields.io/badge/unity-2021.3-green.svg?style=flat-square" alt="unity 2021.3">
 <img src="https://img.shields.io/badge/unity-2022.2-green.svg?style=flat-square" alt="unity 2022.2">
