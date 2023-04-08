@@ -16,6 +16,7 @@ namespace Unity.RenderStreaming.Signaling
 
         private readonly string m_url;
         private readonly float m_timeout;
+        private readonly Header[] m_headers;
         private readonly SynchronizationContext m_mainThreadContext;
         private bool m_running;
         private Thread m_signalingThread;
@@ -32,6 +33,7 @@ namespace Unity.RenderStreaming.Signaling
                 throw new ArgumentException("signalingSettings is not WebSocketSignalingSettings");
             m_url = settings.url;
             m_timeout = 5.0f;
+            m_headers = (Header[])settings.headers;
             m_mainThreadContext = mainThreadContext;
             m_wsCloseEvent = new AutoResetEvent(false);
 
@@ -176,6 +178,20 @@ namespace Unity.RenderStreaming.Signaling
                 m_webSocket.SslConfiguration.EnabledSslProtocols =
                     SslProtocols.Tls | SslProtocols.Tls11 | SslProtocols.Tls12;
             }
+
+            // foreach (var header in m_headers)
+            // {
+            //     m_webSocket.CustomHeaders.Add(header.name, header.value);
+            // }
+
+            Dictionary<string, string> headers = new ();
+
+            foreach (Header header in m_headers)
+            {
+                headers.Add(header.name, header.value);
+            }
+
+            m_webSocket.CustomHeaders = headers;
 
             m_webSocket.OnOpen += WSConnected;
             m_webSocket.OnMessage += WSProcessMessage;

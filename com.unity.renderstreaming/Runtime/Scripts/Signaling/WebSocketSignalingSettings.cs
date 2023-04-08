@@ -27,17 +27,21 @@ namespace Unity.RenderStreaming
         /// </summary>
         public string url => m_url;
 
+        public IReadOnlyCollection<Header> headers => m_headers;
+
         [SerializeField]
         protected string m_url;
         [SerializeField]
         protected IceServer[] m_iceServers;
+        [SerializeField]
+        protected Header[] m_headers;
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="url"></param>
         /// <param name="iceServers"></param>
-        public WebSocketSignalingSettings(string url, IceServer[] iceServers = null)
+        public WebSocketSignalingSettings(string url, IceServer[] iceServers = null, Header[] headers = null)
         {
             if (url == null)
                 throw new ArgumentNullException("url");
@@ -46,6 +50,19 @@ namespace Unity.RenderStreaming
 
             m_url = url;
             m_iceServers = iceServers == null ? Array.Empty<IceServer>() : iceServers.Select(server => server.Clone()).ToArray();
+            m_headers = headers == null ? Array.Empty<Header>() : headers.Select(header => header.Clone()).ToArray();
+        }
+
+        public void AddHeader(string name, string value)
+        {
+            if (m_headers == null)
+            {
+                m_headers = new Header[] { new Header(name, value) };
+            }
+            else
+            {
+                m_headers = m_headers.Append(new Header(name, value)).ToArray();
+            }
         }
 
         /// <summary>
@@ -111,6 +128,24 @@ namespace Unity.RenderStreaming
                         urls: urls)
                     };
             return true;
+        }
+    }
+
+    [Serializable]
+    public class Header
+    {
+        public string name;
+        public string value;
+
+        public Header(string name, string value)
+        {
+            this.name = name;
+            this.value = value;
+        }
+
+        public Header Clone()
+        {
+            return new Header(name, value);
         }
     }
 }

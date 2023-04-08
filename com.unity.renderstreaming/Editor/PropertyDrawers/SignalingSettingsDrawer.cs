@@ -134,6 +134,7 @@ namespace Unity.RenderStreaming.Editor
             VisualElement root = new VisualElement();
             root.Add(new PropertyField(property.FindPropertyRelative("m_url"), "URL"));
             root.Add(new PropertyField(property.FindPropertyRelative("m_iceServers"), "ICE Servers"));
+            root.Add(new PropertyField(property.FindPropertyRelative("m_headers"), "Headers"));
             return root;
         }
     }
