@@ -191,9 +191,20 @@ namespace Unity.RenderStreaming
                 }
             }
 #endif
-            RTCIceServer[] iceServers = settings.iceServers.OfType<RTCIceServer>().ToArray();
-            RTCConfiguration _conf =
-                conf.GetValueOrDefault(new RTCConfiguration { iceServers = iceServers });
+            // Convert each server to RTCIceServer
+            List<RTCIceServer> iceServersList = new List<RTCIceServer>();
+            foreach (IceServer server in settings.iceServers)
+            {
+                iceServersList.Add(new RTCIceServer
+                {
+                    urls = server.urls.ToArray(),
+                    username = server.username,
+                    credential = server.credential
+                });
+            }
+            RTCIceServer[] iceServers = iceServersList.ToArray();
+            
+            RTCConfiguration _conf = new RTCConfiguration { iceServers = iceServers };
 
             ISignaling _signaling = signaling ?? CreateSignaling(settings, SynchronizationContext.Current);
             RenderStreamingDependencies dependencies = new RenderStreamingDependencies
