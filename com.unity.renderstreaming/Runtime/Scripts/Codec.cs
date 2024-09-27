@@ -4,7 +4,7 @@ using Unity.WebRTC;
 
 namespace Unity.RenderStreaming
 {
-    internal static class RTCRtpCodecCapabilityExtension
+    public static class RTCRtpCodecCapabilityExtension
     {
         public static string GetCodecName(this string mimeType)
         {

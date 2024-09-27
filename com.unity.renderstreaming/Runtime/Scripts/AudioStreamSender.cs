@@ -270,7 +270,7 @@ namespace Unity.RenderStreaming
             OnStoppedStream += _OnStoppedStream;
         }
 
-        private protected override void OnDestroy()
+        protected override void OnDestroy()
         {
             base.OnDestroy();
 
@@ -293,7 +293,7 @@ namespace Unity.RenderStreaming
             m_sourceImpl = null;
         }
 
-        internal override WaitForCreateTrack CreateTrack()
+        public override WaitForCreateTrack CreateTrack()
         {
             m_sourceImpl?.Dispose();
             m_sourceImpl = CreateAudioStreamSource();

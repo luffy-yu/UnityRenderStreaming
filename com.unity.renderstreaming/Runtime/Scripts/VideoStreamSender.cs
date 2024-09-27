@@ -9,11 +9,11 @@ using UnityEngine.Rendering;
 
 namespace Unity.RenderStreaming
 {
-    internal sealed class StreamingSizeAttribute : PropertyAttribute { }
+    public sealed class StreamingSizeAttribute : PropertyAttribute { }
 
-    internal sealed class FrameRateAttribute : PropertyAttribute { }
+    public sealed class FrameRateAttribute : PropertyAttribute { }
 
-    internal sealed class BitrateAttribute : PropertyAttribute
+    public sealed class BitrateAttribute : PropertyAttribute
     {
         public int minValue;
         public int maxValue;
@@ -25,16 +25,16 @@ namespace Unity.RenderStreaming
         }
     }
 
-    internal sealed class RenderTextureAntiAliasingAttribute : PropertyAttribute { }
+    public sealed class RenderTextureAntiAliasingAttribute : PropertyAttribute { }
 
-    internal sealed class RenderTextureDepthBufferAttribute : PropertyAttribute { }
+    public sealed class RenderTextureDepthBufferAttribute : PropertyAttribute { }
 
-    internal sealed class WebCamDeviceAttribute : PropertyAttribute { }
+    public sealed class WebCamDeviceAttribute : PropertyAttribute { }
 
-    internal sealed class ScaleResolutionAttribute : PropertyAttribute { }
+    public sealed class ScaleResolutionAttribute : PropertyAttribute { }
 
     [Serializable]
-    internal struct Range
+    public struct Range
     {
         public uint min;
         public uint max;
@@ -42,7 +42,7 @@ namespace Unity.RenderStreaming
         public Range(uint min, uint max) { this.min = min; this.max = max; }
     }
 
-    internal sealed class CodecAttribute : PropertyAttribute { }
+    public sealed class CodecAttribute : PropertyAttribute { }
 
     internal static class RTCRtpSenderExtension
     {
@@ -142,7 +142,7 @@ namespace Unity.RenderStreaming
         private Camera m_Camera;
 
         [SerializeField]
-        private Texture m_Texture;
+        public Texture m_Texture;
 
         [SerializeField, WebCamDevice]
         private int m_WebCamDeviceIndex;
@@ -448,7 +448,7 @@ namespace Unity.RenderStreaming
             OnStoppedStream += _OnStoppedStream;
         }
 
-        private protected override void OnDestroy()
+        protected override void OnDestroy()
         {
             base.OnDestroy();
 
@@ -462,7 +462,7 @@ namespace Unity.RenderStreaming
             m_sourceImpl = null;
         }
 
-        internal override WaitForCreateTrack CreateTrack()
+        public override WaitForCreateTrack CreateTrack()
         {
             m_sourceImpl?.Dispose();
             m_sourceImpl = CreateVideoStreamSource();

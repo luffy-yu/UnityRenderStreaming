@@ -12,7 +12,7 @@ namespace Unity.RenderStreaming
     /// </summary>
     public abstract class StreamSenderBase : MonoBehaviour, IStreamSender
     {
-        internal class WaitForCreateTrack : CustomYieldInstruction
+        public class WaitForCreateTrack : CustomYieldInstruction
         {
             public MediaStreamTrack Track { get { return m_track; } }
 
@@ -31,7 +31,7 @@ namespace Unity.RenderStreaming
             }
         }
 
-        internal Coroutine StartCoroutineWithCallback<T>(T coroutine, Action<T> callback) where T : IEnumerator
+        public Coroutine StartCoroutineWithCallback<T>(T coroutine, Action<T> callback) where T : IEnumerator
         {
             if (coroutine == null)
                 throw new ArgumentNullException("coroutine");
@@ -65,10 +65,10 @@ namespace Unity.RenderStreaming
         /// 
         /// </summary>
         /// <returns></returns>
-        internal abstract WaitForCreateTrack CreateTrack();
+        public abstract WaitForCreateTrack CreateTrack();
 
 
-        internal virtual void ReplaceTrack(MediaStreamTrack newTrack)
+        public virtual void ReplaceTrack(MediaStreamTrack newTrack)
         {
             if (newTrack == null)
                 throw new ArgumentNullException("track", "This argument must be not null.");
@@ -125,7 +125,7 @@ namespace Unity.RenderStreaming
             }
         }
 
-        private protected virtual void OnDestroy()
+        protected virtual void OnDestroy()
         {
             m_track?.Dispose();
             m_track = null;

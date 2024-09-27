@@ -120,7 +120,7 @@ namespace Unity.RenderStreaming
             }
         }
 
-        static internal VideoCodecInfo Create(RTCRtpCodecCapability caps)
+        public static VideoCodecInfo Create(RTCRtpCodecCapability caps)
         {
             switch (caps.mimeType)
             {
