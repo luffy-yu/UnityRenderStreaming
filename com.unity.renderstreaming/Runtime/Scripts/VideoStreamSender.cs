@@ -644,11 +644,13 @@ namespace Unity.RenderStreaming
 
             public VideoStreamSourceScreen(VideoStreamSender parent) : base(parent)
             {
+                Debug.LogError("1");
                 m_behaviour = parent;
             }
 
             static Vector2Int GetScreenSize()
             {
+                Debug.LogError("2");
                 /// Screen.width/height returns size of the active window.
                 /// However, it is mandatory to get size of the game view when player mode.
                 /// UnityStats is used here because it returns the size of game view anytime.
@@ -672,11 +674,13 @@ namespace Unity.RenderStreaming
 
             public static void CopyTextureFunction(Texture source, RenderTexture dest)
             {
+                Debug.LogError("3");
                 Graphics.Blit(source, dest);
             }
 
             public override WaitForCreateTrack CreateTrack()
             {
+                Debug.LogError("4");
                 Vector2Int screenSize = GetScreenSize();
                 m_screenTexture =
                     new RenderTexture(screenSize.x, screenSize.y, depth, RenderTextureFormat.Default) { antiAliasing = antiAliasing };
@@ -707,6 +711,7 @@ namespace Unity.RenderStreaming
             {
                 while (true)
                 {
+                    Debug.LogError("5");
                     yield return new WaitForEndOfFrame();
                     ScreenCapture.CaptureScreenshotIntoRenderTexture(m_screenTexture);
                     Graphics.ConvertTexture(m_screenTexture, m_screenCopyTexture);
@@ -715,6 +720,7 @@ namespace Unity.RenderStreaming
 
             public override void Dispose()
             {
+                Debug.LogError("6");
                 if (m_screenTexture == null)
                     return;
                 m_screenTexture.Release();
@@ -733,6 +739,7 @@ namespace Unity.RenderStreaming
 
             ~VideoStreamSourceScreen()
             {
+                Debug.LogError("7");
                 Dispose();
             }
         }
